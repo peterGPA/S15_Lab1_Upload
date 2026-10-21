@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ZombiePartyDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
+builder.Services.AddNotyf();
 
 
 var app = builder.Build();
@@ -24,7 +25,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseNotyf(); // shows toasts raised during fetch / AJAX / htmx calls
 app.UseAuthorization();
 
 app.MapControllerRoute(

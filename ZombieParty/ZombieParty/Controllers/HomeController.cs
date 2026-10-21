@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using ZombieParty.Models;
 
 namespace ZombieParty.Controllers
@@ -7,14 +8,21 @@ namespace ZombieParty.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly INotyfService _notyf;
 
-        public HomeController(ILogger<HomeController> logger)
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+        public HomeController(INotyfService notyf)
         {
-            _logger = logger;
+            _notyf = notyf;
         }
+
 
         public IActionResult Index()
         {
+            _notyf.Success("Bienvenue !");
             return View();
         }
 
